@@ -35,6 +35,7 @@ int buscar_id(int *id)
     }
   fclose(p);
   return -1;
+  cout << "ok";
 }
 int buscar_id_restaurante(int *id)
 {
@@ -117,8 +118,6 @@ bool cargar_plato(struct pizzeria *reg)
 }
 void mostrar_platos(pizzeria reg)
 {
-    cout << " =================================== " << endl;
-    cout << endl;
     cout << "  ID DEL PLATO : " << "          " <<  reg.id << endl;
     cout << "  NOMBRE DEL PLATO : " << "      " << reg.nombre << endl;
     cout << "  COSTO DE PREPARACION : " << "  $" <<  reg.costo_preparacion << endl;
@@ -128,6 +127,7 @@ void mostrar_platos(pizzeria reg)
     cout << "  COMISION RESTAURANTE : " << "  " <<  reg.comision_restaurante << "%"<< endl;
     cout << "  ID CATEGORIA : " << "          " <<reg.id_categoria << endl;
     cout << "  ESTADO DEL PLATO : " << "      " << reg.estado << endl;
+    cout << " =================================== " << endl;
     cout << endl;
 }
 pizzeria listar_plato_id(int pos)
@@ -139,7 +139,31 @@ pizzeria listar_plato_id(int pos)
     fread(&reg,sizeof(pizzeria),1,p);
     fclose(p);
     return reg;
-    // ME MUESTRA EL REGISTRO PLATOS AUNQUE LA ID NO EXISTA SIEMPRE MUESTRA EL REGISTRO 1
+}
+bool listar_plato_id_restaurante(int id_restaurante)
+{
+    pizzeria reg;
+    int bandera = 0;
+    int pos = 0;
+    FILE *p;
+    p = fopen(PATH_ARCHIVO,"rb");
+    if(p == NULL){
+        return false;
+    }
+    while(fread(&reg,sizeof(pizzeria),1,p) == 1){
+        if(reg.id_restaurante == id_restaurante){
+            reg = listar_plato_id(pos);
+            mostrar_platos(reg);
+            bandera = 1;
+        }
+      pos+=1;
+    }
+    if(bandera == 0){
+        fclose(p);
+        return false;
+    }
+    fclose(p);
+    return true;
 }
 int cantidad_platos()
 {
@@ -168,23 +192,32 @@ void listar_platos()
 }
 bool sobreescribir_plato(pizzeria reg,int pos)
 {
-bool escribio;
+bool sobreescribio;
   FILE * p;
   p = fopen(PATH_ARCHIVO,"rb+");
   if(p == NULL){
     return false;
   }
   fseek(p,pos * sizeof(pizzeria),SEEK_SET);
-  escribio = fwrite(&reg,sizeof(pizzeria),1,p);
+  sobreescribio = fwrite(&reg,sizeof(pizzeria),1,p);
   fclose(p);
-  return escribio;
+  return sobreescribio;
 }
 bool editar_plato()
 {
     int id_buscado,pos;
     cout << " INGRESE EL ID A EDITAR : ";
     cin >> id_buscado;
-    pos = buscar_id(&id_buscado);
+    if(id_buscado > 0){
+       pos = buscar_id(&id_buscado);
+    }
+    else{
+        system("cls");
+        cout << endl;
+        cout << " | --------------------------------------------- |" << endl;
+        cout << " | LA ID NO PUEDE SER UN NUMERO NEGATIVO O CERO  |" << endl;
+        cout << " | --------------------------------------------- |" << endl;
+    }
     if(pos >= 0){
         pizzeria reg = listar_plato_id(pos);
         cout << endl;
@@ -197,8 +230,8 @@ bool editar_plato()
             return false;
         }
         cout << " NUEVO TIEMPO DE PREPARACION : ";
-        cout << " =================================== " << endl;
         cin >> reg.tiempo_preparacion;
+        cout << " =================================== " << endl;
         if(reg.tiempo_preparacion < 0){
             return false;
         }
@@ -217,6 +250,36 @@ bool editar_plato()
     }
     return true;
 }
+bool eliminar_plato()
+{
+    pizzeria reg;
+    int id_delete,pos;
+    cout << " ======================================= " << endl;
+   cout << " INGRESE LA ID DEL PLATO A ELIMINAR ";
+   cin >> id_delete;
+   cout << " ======================================= " << endl;
+   if(id_delete > 0){
+       pos = buscar_id(&id_delete);
+    }
+    else{
+        system("cls");
+        cout << endl;
+        cout << " LA ID NO PUEDE SER UN NUMERO NEGATIVO O CERO " << endl;
+    }
+    if(pos >= 0){
+          pizzeria reg = listar_plato_id(pos);
+          cout << endl;
+          reg.estado = 0;
+          if(sobreescribir_plato(reg,pos)){
+            mostrar_platos(reg);
+            getch();
+            return true;
+      }
+    }
+    else{
+        return false;
+    }
+}
 void menuplatos()
 {
     int opplatos;
@@ -232,6 +295,7 @@ void menuplatos()
         cout << " 3) MOSTRAR PLATO POR ID " << endl;
         cout << " 4) PLATOS POR RESTAURANTE " << endl;
         cout << " 5) LISTAR TODOS LOS PLATOS " << endl;
+        cout << " 6) ELIMINAR PLATO " << endl;
         cout << " --------------------- " << endl;
         cout << " 0) VOLVER AL MENU PRINCIPAL " << endl;
         cout << " --------------------- " << endl;
@@ -258,9 +322,9 @@ void menuplatos()
                 {
                     system("cls");
                     cout << endl;
-                    cout << " | =========================== |" << endl;
-                    cout << " | NO SE PUDO CARGAR EL PLATO  |" << endl;
-                    cout << " | =========================== |" << endl;
+                    cout << " | ========================================== |" << endl;
+                    cout << " |  NO SE PUDO CARGAR EL PLATO CORRECTAMENTE  |" << endl;
+                    cout << " | ========================================== |" << endl;
                     cout << endl;
                     system("pause");
                 }
@@ -291,7 +355,11 @@ void menuplatos()
                 cout << " [  INGRESE LA ID DEL PLATO A BUSCAR : ";
                 cin >> id;
                 cout << " [ ------------------------------------- ]" << endl;
-                pos = buscar_id(&id);
+                cout << endl;
+                if(id > 0){
+                    pos = buscar_id(&id);
+                }
+                cout << " =================================== " << endl;
                 if( pos < 0 ){
                 system("cls");
                 cout << endl;
@@ -307,28 +375,57 @@ void menuplatos()
             }break;
         case 4:
             {
+                // IMPORTANTE NO VA A MOSTRAR TODOS LOS RESTAURANTES CON LA MISMA ID
                 system("cls");
                 int id_restaurante,pos;
+                bool existe;
                 cout << " +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ " << endl;
                 cout << " +- INGRESE LA ID DEL RESTAURANTE A BUSCAR : ";
                 cin >> id_restaurante;
                 cout << " +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ " << endl;
-                pos = buscar_id(&id_restaurante);
-                if(pos < 0){
+                cout << endl;
+                cout << " =================================== " << endl;
+                existe = listar_plato_id_restaurante(id_restaurante);
+                if(pos >= 0 && existe){
+                        cout << endl;
+                        cout << " **************************************** " << endl;
+                        cout << "  SE MOSTRARON CORRECTAMENTE LOS PLATOS   " << endl;
+                        cout << " **************************************** " << endl;
+                }
+                else{
                     cout << endl;
                     cout << " ************************************ " << endl;
                     cout << " NO SE ENCONTRO LA ID DEL RESTAURANTE " << endl;
                     cout << " ************************************ " << endl;
-                }
-                else{
-                    mostrar_platos(listar_plato_id(pos));
                 }
                 getch();
             }break;
         case 5:
             {
                 system("cls");
-                listar_platos();
+                if(cantidad_platos() > 0){
+                        listar_platos();
+                }
+                else{
+                    cout << endl;
+                    cout << " | ============================= | " << endl;
+                    cout << " |    NO HAY PLATOS CARGADOS     | " << endl;
+                    cout << " | ============================= | " << endl;
+                }
+
+                getch();
+            }break;
+        case 6:
+            {
+                system("cls");
+                if(eliminar_plato()){
+                    cout << endl;
+                    cout << " SE CAMBIO EL ESTADO DEL PLATO CORRECTAMENTE " << endl;
+                }
+                else{
+                    cout << endl;
+                    cout << " NO EXISTE LA ID DEL PLATO INGRESADO " << endl;
+                }
                 getch();
             }break;
         case 0:

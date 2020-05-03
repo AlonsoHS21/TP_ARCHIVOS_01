@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1588318432 source:c:\users\alons\desktop\tp archivos n1\tp_archivos_1\main.cpp
+1588383618 source:c:\users\alons\desktop\tp archivos n1\tp_archivos_1\main.cpp
 	<iostream>
 	<cstdlib>
 	<conio.h>
 	"funcionmenuplatos.h"
 	<fstream>
+	<clocale>
 
-1588320813 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionmenuplatos.h
+1588539245 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionmenuplatos.h
 	<fstream>
 
