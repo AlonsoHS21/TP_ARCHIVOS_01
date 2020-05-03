@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1588383618 source:c:\users\alons\desktop\tp archivos n1\tp_archivos_1\main.cpp
+1588539968 source:c:\users\alons\desktop\tp archivos n1\tp_archivos_1\main.cpp
 	<iostream>
 	<cstdlib>
 	<conio.h>
@@ -7,6 +7,6 @@
 	<fstream>
 	<clocale>
 
-1588539245 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionmenuplatos.h
+1588541595 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionmenuplatos.h
 	<fstream>
 
