@@ -35,7 +35,6 @@ int buscar_id(int *id)
     }
   fclose(p);
   return -1;
-  cout << "ok";
 }
 int buscar_id_restaurante(int *id)
 {
