@@ -1,6 +1,7 @@
 #ifndef FUNCIONMENUPLATOS_H_INCLUDED
 #define FUNCIONMENUPLATOS_H_INCLUDED
 
+using namespace std;
 #include <fstream>
 
 const char *PATH_ARCHIVO = "ARCHIVO_PLATOS.dat";
@@ -113,6 +114,7 @@ bool cargar_plato(struct pizzeria *reg)
     }
     reg->estado = 1;
     cout << " ESTADO DEL PLATO : " << reg->estado << endl;
+    getch();
     return true;
 }
 void mostrar_platos(pizzeria reg)
@@ -121,7 +123,7 @@ void mostrar_platos(pizzeria reg)
     cout << "  NOMBRE DEL PLATO : " << "      " << reg.nombre << endl;
     cout << "  COSTO DE PREPARACION : " << "  $" <<  reg.costo_preparacion << endl;
     cout << "  VALOR DE VENTA : " << "        $" << reg.valor_venta << endl;
-    cout << "  TIEMPO DE PREPARACION : " <<" " << reg.tiempo_preparacion << "  MINUTOS " << endl;
+    cout << "  TIEMPO DE PREPARACION : " <<" " << reg.tiempo_preparacion << " MINUTOS " << endl;
     cout << "  ID RESTAURANTE : " << "        " <<reg.id_restaurante << endl;
     cout << "  COMISION RESTAURANTE : " << "  " <<  reg.comision_restaurante << "%"<< endl;
     cout << "  ID CATEGORIA : " << "          " <<reg.id_categoria << endl;
@@ -139,7 +141,7 @@ pizzeria listar_plato_id(int pos)
     fclose(p);
     return reg;
 }
-bool listar_plato_id_restaurante(int id_restaurante)
+int listar_plato_id_restaurante(int id_restaurante)
 {
     pizzeria reg;
     int bandera = 0;
@@ -147,7 +149,7 @@ bool listar_plato_id_restaurante(int id_restaurante)
     FILE *p;
     p = fopen(PATH_ARCHIVO,"rb");
     if(p == NULL){
-        return false;
+        return -1;
     }
     while(fread(&reg,sizeof(pizzeria),1,p) == 1){
         if(reg.id_restaurante == id_restaurante){
@@ -159,10 +161,10 @@ bool listar_plato_id_restaurante(int id_restaurante)
     }
     if(bandera == 0){
         fclose(p);
-        return false;
+        return -1;
     }
     fclose(p);
-    return true;
+    return 1;
 }
 int cantidad_platos()
 {
@@ -191,11 +193,11 @@ void listar_platos()
 }
 bool sobreescribir_plato(pizzeria reg,int pos)
 {
-bool sobreescribio;
+bool sobreescribio = false;
   FILE * p;
   p = fopen(PATH_ARCHIVO,"rb+");
   if(p == NULL){
-    return false;
+    return sobreescribio;
   }
   fseek(p,pos * sizeof(pizzeria),SEEK_SET);
   sobreescribio = fwrite(&reg,sizeof(pizzeria),1,p);
@@ -247,7 +249,6 @@ bool editar_plato()
 }
 bool eliminar_plato()
 {
-    pizzeria reg;
     int id_delete,pos;
     cout << " ======================================= " << endl;
    cout << " INGRESE LA ID DEL PLATO A ELIMINAR ";
@@ -274,6 +275,7 @@ bool eliminar_plato()
     else{
         return false;
     }
+return true;
 }
 void menuplatos()
 {
@@ -289,6 +291,7 @@ void menuplatos()
         cout << " 2) MODIFICAR PLATO " << endl;
         cout << " 3) MOSTRAR PLATO POR ID " << endl;
         cout << " 4) PLATOS POR RESTAURANTE " << endl;
+        cout << " 5) LISTAR TODOS LOS PLATOS " << endl;
         cout << " 5) LISTAR TODOS LOS PLATOS " << endl;
         cout << " 6) ELIMINAR PLATO " << endl;
         cout << " --------------------- " << endl;
@@ -369,18 +372,16 @@ void menuplatos()
             }break;
         case 4:
             {
-                // IMPORTANTE NO VA A MOSTRAR TODOS LOS RESTAURANTES CON LA MISMA ID
                 system("cls");
                 int id_restaurante,pos;
-                bool existe;
                 cout << " +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ " << endl;
                 cout << " +- INGRESE LA ID DEL RESTAURANTE A BUSCAR : ";
                 cin >> id_restaurante;
                 cout << " +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ " << endl;
                 cout << endl;
                 cout << " =================================== " << endl;
-                existe = listar_plato_id_restaurante(id_restaurante);
-                if(pos >= 0 && existe){
+                pos = listar_plato_id_restaurante(id_restaurante);
+                if(pos == 1){
                         cout << endl;
                         cout << " **************************************** " << endl;
                         cout << "  SE MOSTRARON CORRECTAMENTE LOS PLATOS   " << endl;

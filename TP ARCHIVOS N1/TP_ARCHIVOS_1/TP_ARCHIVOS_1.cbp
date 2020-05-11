@@ -32,8 +32,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="funcionconfiguracion.h" />
+		<Unit filename="funcionesextra.h" />
+		<Unit filename="funcionespedidos.h" />
+		<Unit filename="funcionmenuclientes.h" />
 		<Unit filename="funcionmenuplatos.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="prototipos.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

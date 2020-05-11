@@ -1,9 +1,17 @@
 #include <iostream>
 #include <cstdlib>
 #include <conio.h>
+#include <string.h>
+#include <ctime>
+
+
 
 using namespace std;
+#include "funcionesextra.h"
 #include "funcionmenuplatos.h"
+#include "funcionmenuclientes.h"
+#include "funcionespedidos.h"
+#include "funcionconfiguracion.h"
 #include <fstream>
 #include <clocale>
 
@@ -37,11 +45,11 @@ int main()
             }break;
         case 2:
             {
-
+                menuclientes();
             }break;
         case 3:
             {
-
+                menupedidos();
             }break;
         case 4:
             {
@@ -49,13 +57,14 @@ int main()
             }break;
         case 5:
             {
-
+              menuconfiguracion();
             }break;
         case 0:
             {
-                salirmenu = true;
+                return 0;
             }break;
         }
     }
     return 0;
 }
+
