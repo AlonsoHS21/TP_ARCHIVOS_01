@@ -61,25 +61,31 @@ bool validacion_mail(char *cadena)
 
     if(cadena[0] == '\0' || cadena[0] == '@' || cadena[0] == '.' )
     {
+        cout << "asda " << endl;
+        getch();
         return true;
     }
-    int x = 0;
     int cont_arroba = 0;
+    int cont_punto = 0;
     int longitud = strlen(cadena);
-    while(cadena[x] != '\0'){
+    for(int x = 0;x < longitud;x++){
 
-        if(!(cadena[x] == '.')){
-                return true;
+        if(cadena[x] == '.'){
+                cont_punto++;
+                if(cont_punto == 0){
+                   return true;
+                }
         }
         if(cadena[x] == '@'){
-            cont_arroba++;
-            if(cont_arroba > 0){
+            cont_arroba+=1;
+            if(cont_arroba > 1){
+                    cout <<  cont_arroba;
+                    getch();
                 return true;
             }
         }
-        x++;
     }
-    if(cadena[longitud-1] == '.' || cadena[longitud-1] == ':'){
+    if(cadena[longitud] == '.' || cadena[longitud] == ':'){
         return true;
     }
  return false;
@@ -96,39 +102,38 @@ bool cargar_cliente(clientes *regclientes)
 {
     //faltan validaciones
     system("color 06");
-    cout << " ================================ " << endl;
-    cout << " ID DEL CLIENTE : ";
+    cout << " ID DEL CLIENTE :          ";
     regclientes->id = cantidad_clientes() + 1;
     cout << regclientes->id << endl;
+    cout << " ================================ " << endl;
     cin.ignore();
-    cout << " NOMBRES DEL CLIENTE : ";
+    cout << " NOMBRES DEL CLIENTE :    ";
     cin.getline(regclientes->nombres,50);
     if(vacio(regclientes->nombres)){
         return false;
     }
-    cout << " APELLIDOS DEL CLIENTE :  ";
-    cin.ignore();
+    cout << " APELLIDOS DEL CLIENTE :   ";
     cin.getline(regclientes->apellidos,50);
     if(vacio(regclientes->apellidos)){
         return false;
     }
-    cout << " MAIL DEL CLIENTE : ";
+    cout << " MAIL DEL CLIENTE :        ";
     cin >> regclientes->mail;
     if(validacion_mail(regclientes->mail)){
         return false;
     }
-    cout << " DOMICILIO DEL CLIENTE : ";
+    cout << " DOMICILIO DEL CLIENTE :   ";
     cin.ignore();
     cin.getline(regclientes->domicilio,100);
     if(vacio(regclientes->domicilio)){
         return false;
     }
-    cout << " CODIGO POSTAL ";
+    cout << " CODIGO POSTAL :           ";
     cin >> regclientes->cp;
     if(regclientes->cp < 1000 || regclientes->cp > 9999 ){
         return false;
     }
-    cout << " FECHA DE NACIMIENTO : " << endl;
+    cout << " FECHA DE NACIMIENTO " << endl;
     cout << " DIA --> ";
     cin >> regclientes->nacimiento.dia;
     if(regclientes->nacimiento.dia <= 0 || regclientes->nacimiento.dia > 31){
@@ -145,7 +150,7 @@ bool cargar_cliente(clientes *regclientes)
         return false;
     }
     regclientes->estado = 1;
-    cout << " ESTADO DEL CLIENTE : " << regclientes->estado << endl;
+    cout << " ESTADO DEL CLIENTE :       " << regclientes->estado << endl;
     getch();
     return true;
 }
