@@ -61,8 +61,6 @@ bool validacion_mail(char *cadena)
 
     if(cadena[0] == '\0' || cadena[0] == '@' || cadena[0] == '.' )
     {
-        cout << "asda " << endl;
-        getch();
         return true;
     }
     int cont_arroba = 0;
