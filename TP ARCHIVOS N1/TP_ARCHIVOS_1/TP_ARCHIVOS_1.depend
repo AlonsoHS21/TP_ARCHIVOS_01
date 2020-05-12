@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1589159948 source:c:\users\alons\desktop\tp archivos n1\tp_archivos_1\main.cpp
+1589266714 source:c:\users\alons\desktop\tp archivos n1\tp_archivos_1\main.cpp
 	<iostream>
 	<cstdlib>
 	<conio.h>
+	<string.h>
 	<ctime>
-	"funcionesextra.h"
 	"funcionmenuplatos.h"
 	"funcionmenuclientes.h"
 	"funcionespedidos.h"
@@ -12,18 +12,17 @@
 	<fstream>
 	<clocale>
 
-1589183967 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionmenuplatos.h
+1589266806 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionmenuplatos.h
 	<fstream>
 
-1589185222 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionmenuclientes.h
-	"funcionesextra.h"
+1589266812 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionmenuclientes.h
 
 1588742874 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\prototipos.h
 
 1588744708 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionesextra.h
 
-1589183631 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionespedidos.h
+1589266960 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionespedidos.h
 	"funcionmenuclientes.h"
 
-1589156057 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionconfiguracion.h
+1589266819 c:\users\alons\desktop\tp archivos n1\tp_archivos_1\funcionconfiguracion.h
 

@@ -1,8 +1,6 @@
 #ifndef FUNCIONMENUCLIENTES_H_INCLUDED
 #define FUNCIONMENUCLIENTES_H_INCLUDED
 
-#include "funcionesextra.h"
-
 const char *PATH_CLIENTES = "ARCHIVOS_CLIENTES.dat";
 
 struct fecha{
@@ -68,7 +66,7 @@ bool validacion_mail(char *cadena)
     int x = 0;
     int cont_arroba = 0;
     int longitud = strlen(cadena);
-    while(cadena == '\0'){
+    while(cadena[x] != '\0'){
 
         if(!(cadena[x] == '.')){
                 return true;
@@ -84,7 +82,7 @@ bool validacion_mail(char *cadena)
     if(cadena[longitud-1] == '.' || cadena[longitud-1] == ':'){
         return true;
     }
-    return false;
+ return false;
 }
 bool vacio(char *cad)
 {
@@ -96,7 +94,8 @@ bool vacio(char *cad)
 
 bool cargar_cliente(clientes *regclientes)
 {
-
+    //faltan validaciones
+    system("color 06");
     cout << " ================================ " << endl;
     cout << " ID DEL CLIENTE : ";
     regclientes->id = cantidad_clientes() + 1;
@@ -208,18 +207,21 @@ void validar(int num)
     case -1:
         {
             system("cls");
+            system("color 04");
             cout << " *********************************** " << endl;
             cout << " NO SE PUDO ABRIR EL ARCHIVO CLIENTE " << endl;
             cout << " *********************************** " << endl;
         }break;
     case -2:
         {
+            system("color 04");
             cout << " **************************** " << endl;
             cout << " NO SE PUDO MOSTAR EL CLIENTE " << endl;
             cout << " **************************** " << endl;
         }break;
     case 1:
         {
+            system("0F");
             cout << " ********************************** " << endl;
             cout << " SE MOSTRO EL CLIENTE CORRECTAMENTE " << endl;
             cout << " ********************************** " << endl;
@@ -259,6 +261,7 @@ bool listar_clientexid()
         int num = listar_cliente(id);
         if(num == -1){
                 system("cls");
+                system("color 04");
             cout << " *********************************** " << endl;
             cout << " NO SE PUDO ABRIR EL ARCHIVO CLIENTE " << endl;
             cout << " *********************************** " << endl;
@@ -267,6 +270,7 @@ bool listar_clientexid()
         }
         if(num == -2){
             system("cls");
+            system("color 04");
             cout << " ****************** " << endl;
             cout << " NO SE PUDO MOSTRAR " << endl;
             cout << " ****************** " << endl;
@@ -274,6 +278,7 @@ bool listar_clientexid()
         }
         else{
             system("cls");
+            system("0F");
             cout << " *********************** " << endl;
             cout << " SE MOSTRO CORRECTAMENTE " << endl;
             cout << " *********************** " << endl;
@@ -343,6 +348,7 @@ bool editar_cliente()
     }
     else{
     cout << endl;
+    system("color 04");
     cout << " | ========================= | " << endl;
     cout << " | EL ID INGRESADO NO EXISTE | " << endl;
     cout << " | ========================= | " << endl;
@@ -382,6 +388,7 @@ bool eliminar_cliente()
     }
     else{
         system("cls");
+        system("color 04");
         cout << endl;
         cout << " ============================================ " << endl;
         cout << " LA ID NO PUEDE SER UN NUMERO NEGATIVO O CERO " << endl;
@@ -409,6 +416,7 @@ void menuclientes()
     bool salirmenuclientes = false;
     while(!salirmenuclientes)
     {
+        system("color E0");
         system("cls");
         cout << endl;
         cout << " MENU CLIENTES " << endl;
@@ -439,6 +447,7 @@ void menuclientes()
                     }
                     else{
                         system("cls");
+                        system("color 04");
                         cout << " ====================== " << endl;
                         cout << " NO SE CARGO EL CLIENTE " << endl;
                         cout << " ====================== " << endl;
@@ -447,6 +456,7 @@ void menuclientes()
                 }
                 else{
                     system("cls");
+                    system("color 04");
                     cout << " ====================== " << endl;
                     cout << " NO SE CARGO EL CLIENTE " << endl;
                     cout << " ====================== " << endl;
@@ -463,6 +473,7 @@ void menuclientes()
                 }
                 else{
                         system("cls");
+                        system("color 04");
                     cout << " ------------------------- " << endl;
                     cout << " NO SE MODIFICO EL CLIENTE " << endl;
                     cout << " ------------------------- " << endl;
@@ -472,6 +483,7 @@ void menuclientes()
             {
               if(!(listar_clientexid())){
                    system("cls");
+                   system("color 04");
                    cout << endl;
                    cout << " ---------------------------- " << endl;
                    cout << " NO SE PUDO MOSTAR EL CLIENTE " << endl;
@@ -491,6 +503,7 @@ void menuclientes()
                         }
                 }
                 else{
+                        system("color 04");
                     cout << endl;
                     cout << " | =============================== | " << endl;
                     cout << " |    NO HAY CLIENTES CARGADOS     | " << endl;
@@ -508,6 +521,7 @@ void menuclientes()
                 }
                 else{
                     system("cls");
+                    system("color 04");
                     cout << "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ " << endl;
                     cout << " NO SE PUDO ELIMINAR EL PLATO " << endl;
                     cout << "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ " << endl;

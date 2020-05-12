@@ -7,7 +7,6 @@
 
 
 using namespace std;
-#include "funcionesextra.h"
 #include "funcionmenuplatos.h"
 #include "funcionmenuclientes.h"
 #include "funcionespedidos.h"
@@ -23,6 +22,7 @@ int main()
     bool salirmenu = false;
     while(!salirmenu)
     {
+        system("color F0");
         system("cls");
         cout << endl;
         cout << " MENU PRINCIPAL " << endl;

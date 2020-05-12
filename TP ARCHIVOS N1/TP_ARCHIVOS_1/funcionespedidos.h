@@ -80,6 +80,7 @@ int buscar_valor_venta(float preciouni)
 
 bool cargar_pedido(Pedidos *reg)
 {
+    system("color 06");
     int id_cliente,id_plato;
     float precio_unitario;
     reg->id = cantidad_pedidos() + 1;
@@ -136,6 +137,7 @@ bool cargar_pedido(Pedidos *reg)
 
 void mostrar_pedido(Pedidos reg)
 {
+    system("0F");
     cout << " ------------------------------------/ " << endl;
     cout << " ID DEL PEDIDO     : " << " " << reg.id << endl;
     cout << " ID CLIENTE        : " << " " << reg.id_cliente << endl;
@@ -176,13 +178,16 @@ bool sobreescribir_pedido(Pedidos reg,int pos)
 bool modificar_pedido()
 {
     int id_buscado,pos = -1;
+    cout << " ----------------------------- " << endl;
     cout << " INGRESE LA ID DEL PEDIDO ";
     cin >> id_buscado;
+    cout << " ----------------------------- " << endl;
     if(id_buscado > 0){
         pos = buscar_id_pedido(id_buscado);
     }
     else{
     system("cls");
+    system("color 04");
     cout << endl;
     cout << " | ========================= | " << endl;
     cout << " | EL ID INGRESADO NO EXISTE | " << endl;
@@ -229,6 +234,7 @@ bool listar_por_id()
     }
     else{
         system("cls");
+        system("color 04");
         cout <<" =========================== " << endl;
         cout << " NO EXISTE EL ID DEL PEDIDO " << endl;
         cout <<" =========================== " << endl;
@@ -258,6 +264,7 @@ void menupedidos()
     bool salirmenupedidos = false;
     while(!salirmenupedidos)
     {
+    system("color E0");
     system("cls");
     cout << endl;
     cout << " MENU PEDIDOS " << endl;
@@ -281,6 +288,7 @@ void menupedidos()
             if(cargar_pedido(&regpedidos)){
                 if(guardar_pedido(regpedidos)){
                     system("cls");
+                    system("0F");
                     cout << " ================================ " << endl;
                     cout << " SE CARGO EL PEDIDO CORRECTAMENTE " << endl;
                     cout << " ================================ " << endl;
@@ -288,6 +296,7 @@ void menupedidos()
             }
             else{
                 system("cls");
+                system("color 04");
                 cout << " =================================== " << endl;
                 cout << "       NO SE CARGO EL PEDIDO         " << endl;
                 cout << " =================================== " << endl;
@@ -299,11 +308,13 @@ void menupedidos()
             system("cls");
             if(modificar_pedido()){
                 system("cls");
+                system("0F");
                 cout << " =================================== " << endl;
                 cout << " SE MODIFICO EL PEDIDO CORRECTAMENTE " << endl;
                 cout << " =================================== " << endl;
             }
             else{
+                system("color 04");
                 cout << " =================================== " << endl;
                 cout << "    NO SE PUDO MODIFICO EL PEDIDO    " << endl;
                 cout << " =================================== " << endl;
@@ -315,6 +326,7 @@ void menupedidos()
           system("cls");
           if(listar_por_id()){
             cout << endl;
+            system("0F");
             cout << " ********************** " << endl;
             cout << " SE LISTO CORRECTAMENTE " << endl;
             cout << " ********************** " << endl;
@@ -330,7 +342,10 @@ void menupedidos()
             }
             else{
                 system("cls");
+                system("color 04");
+                cout << " ==================== " << endl;
                 cout << " NO HAY NINGUN PEDIDO " << endl;
+                cout << " ==================== " << endl;
             }
             getch();
         }break;

@@ -71,6 +71,7 @@ bool guardar_plato(struct pizzeria reg)
 
 bool cargar_plato(struct pizzeria *reg)
 {
+    system("color 06");
     int pos;
     cout << " ------------------------ " << endl;
     cout << " INGRESE EL ID : ";
@@ -119,6 +120,7 @@ bool cargar_plato(struct pizzeria *reg)
 }
 void mostrar_platos(pizzeria reg)
 {
+    system("0F");
     cout << "  ID DEL PLATO : " << "          " <<  reg.id << endl;
     cout << "  NOMBRE DEL PLATO : " << "      " << reg.nombre << endl;
     cout << "  COSTO DE PREPARACION : " << "  $" <<  reg.costo_preparacion << endl;
@@ -207,13 +209,16 @@ bool sobreescribio = false;
 bool editar_plato()
 {
     int id_buscado,pos = -1;
+    cout << " ---------------------------- " << endl;
     cout << " INGRESE EL ID A EDITAR : ";
     cin >> id_buscado;
+    cout << " ---------------------------- " << endl;
     if(id_buscado > 0){
        pos = buscar_id(&id_buscado);
     }
     else{
     cout << endl;
+     system("color 04");
     cout << " | ========================= | " << endl;
     cout << " | EL ID INGRESADO NO EXISTE | " << endl;
     cout << " | ========================= | " << endl;
@@ -259,8 +264,11 @@ bool eliminar_plato()
     }
     else{
         system("cls");
+        system("color 04");
         cout << endl;
+        cout << " -------------------------------------------- " << endl;
         cout << " LA ID NO PUEDE SER UN NUMERO NEGATIVO O CERO " << endl;
+        cout << " -------------------------------------------- " << endl;
     }
     if(pos >= 0){
           pizzeria reg = listar_plato_id(pos);
@@ -283,6 +291,7 @@ void menuplatos()
     bool salirmenuplatos = false;
     while(!salirmenuplatos)
     {
+        system("color E0");
         system("cls");
         cout << endl;
         cout << " MENU PLATOS " << endl;
@@ -291,7 +300,6 @@ void menuplatos()
         cout << " 2) MODIFICAR PLATO " << endl;
         cout << " 3) MOSTRAR PLATO POR ID " << endl;
         cout << " 4) PLATOS POR RESTAURANTE " << endl;
-        cout << " 5) LISTAR TODOS LOS PLATOS " << endl;
         cout << " 5) LISTAR TODOS LOS PLATOS " << endl;
         cout << " 6) ELIMINAR PLATO " << endl;
         cout << " --------------------- " << endl;
@@ -308,6 +316,7 @@ void menuplatos()
                 if(cargar_plato(&regplatos)){
                         if(guardar_plato(regplatos)){
                          system("cls");
+                         system("0F");
                          cout << endl;
                          cout << " | =============================== |" << endl;
                          cout << " | SE CARGO EL PLATO CORRECTAMENTE |" << endl;
@@ -319,6 +328,7 @@ void menuplatos()
                 else
                 {
                     system("cls");
+                     system("color 04");
                     cout << endl;
                     cout << " | ========================================== |" << endl;
                     cout << " |  NO SE PUDO CARGAR EL PLATO CORRECTAMENTE  |" << endl;
@@ -332,12 +342,14 @@ void menuplatos()
                 system("cls");
                 if(editar_plato()){
                     cout << endl;
+                    system("0F");
                     cout << "|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| " << endl;
                     cout << "|-   SE EDITO EL PLATO CORRECTAMENTE   -|" << endl;
                     cout << "|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| " << endl;
                 }
                 else{
                     system("cls");
+                     system("color 04");
                     cout << endl;
                     cout << " |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-| " << endl;
                     cout << " |-   NO SE PUDO EDITAR EL PLATO CORRECTAMENTE    -| " << endl;
@@ -363,6 +375,7 @@ void menuplatos()
                 }
                 else{
                 system("cls");
+                 system("color 04");
                 cout << endl;
                 cout << " | .............................. | " << endl;
                 cout << " | NO SE ENCONTRO LA ID DEL PLATO | " << endl;
@@ -383,12 +396,14 @@ void menuplatos()
                 pos = listar_plato_id_restaurante(id_restaurante);
                 if(pos == 1){
                         cout << endl;
+                        system("0F");
                         cout << " **************************************** " << endl;
                         cout << "  SE MOSTRARON CORRECTAMENTE LOS PLATOS   " << endl;
                         cout << " **************************************** " << endl;
                 }
                 else{
                     cout << endl;
+                     system("color 04");
                     cout << " ************************************ " << endl;
                     cout << " NO SE ENCONTRO LA ID DEL RESTAURANTE " << endl;
                     cout << " ************************************ " << endl;
@@ -403,6 +418,7 @@ void menuplatos()
                 }
                 else{
                     cout << endl;
+                     system("color 04");
                     cout << " | ============================= | " << endl;
                     cout << " |    NO HAY PLATOS CARGADOS     | " << endl;
                     cout << " | ============================= | " << endl;
@@ -415,10 +431,12 @@ void menuplatos()
                 system("cls");
                 if(eliminar_plato()){
                     cout << endl;
+                    system("0F");
                     cout << " SE CAMBIO EL ESTADO DEL PLATO CORRECTAMENTE " << endl;
                 }
                 else{
                     cout << endl;
+                     system("color 04");
                     cout << " NO EXISTE LA ID DEL PLATO INGRESADO " << endl;
                 }
                 getch();
